@@ -515,7 +515,7 @@
                     id: 'milan-metro',
                     title: 'Milan Metro M1 Extension ($360M)',
                     category: 'Metro / BIM Management',
-                    imgSrc: 'https://placehold.co/600x400/115e59/f0f9f9?text=Milan+Metro',
+                    imgSrc: 'milan-metro.jpg', // UPDATED
                     description: `
                         <p>Serving as Assistant BIM Manager / Integrator for Metropolitana Milanese S.p.A on major metro projects.</p>
                         <ul class="list-disc list-outside ml-5 mt-4 space-y-2">
@@ -530,7 +530,7 @@
                     id: 'tel-aviv-metro',
                     title: 'Tel Aviv Metro ($47B)',
                     category: 'Metro / BIM Management',
-                    imgSrc: 'https://placehold.co/600x400/134e4a/f0f9f9?text=Tel+Aviv+Metro',
+                    imgSrc: 'tel-aviv-metro.jpg', // UPDATED
                     description: `
                         <p>Providing full BIM lifecycle leadership for the large-scale Tel Aviv Metro project as part of Metropolitana Milanese S.p.A.</p>
                         <ul class="list-disc list-outside ml-5 mt-4 space-y-2">
@@ -544,7 +544,7 @@
                     id: 'neom-oxagon',
                     title: 'NEOM Oxagon ($33B)',
                     category: 'Infrastructure / BIM Design',
-                    imgSrc: 'https://placehold.co/600x400/115e59/f0f9f9?text=NEOM+Oxagon',
+                    imgSrc: 'neom-oxagon.jpg', // UPDATED
                     description: `
                         <p>As BIM Lead Designer at Jacobs, oversaw the creation and coordination of detailed electrical BIM models for the NEOM Oxagon floating industrial city design.</p>
                         <ul class="list-disc list-outside ml-5 mt-4 space-y-2">
@@ -559,7 +559,7 @@
                     id: 'mumbai-metro',
                     title: 'Mumbai Metro Line 6 & CMRL',
                     category: 'Metro / Detailed Design',
-                    imgSrc: 'https://placehold.co/600x400/134e4a/f0f9f9?text=Mumbai+Metro',
+                    imgSrc: 'mumbai-metro.jpg', // UPDATED
                     description: `
                         <p>Played a key role in the detailed design and construction close-out phases for underground and elevated metro packages.</p>
                         <ul class="list-disc list-outside ml-5 mt-4 space-y-2">
@@ -574,7 +574,7 @@
                     id: 'sea-world',
                     title: 'Sea World Abu Dhabi',
                     category: 'Entertainment / BIM Design',
-                    imgSrc: 'https://placehold.co/600x400/0f766e/f0f9f9?text=Sea+World+AD',
+                    imgSrc: 'sea-world.jpg', // UPDATED
                     description: `
                         <p>Led the electrical system modeling for this large-scale entertainment venue.</p>
                         <ul class="list-disc list-outside ml-5 mt-4 space-y-2">
@@ -588,7 +588,7 @@
                     id: 'honolulu-rail',
                     title: 'Honolulu Rail Transit (Hawaii)',
                     category: 'Rail / BIM Design',
-                    imgSrc: 'https://placehold.co/600x400/0d9488/f0f9f9?text=Honolulu+Rail',
+                    imgSrc: 'honolulu-rail.jpg', // UPDATED
                     description: `
                         <p>Contributed to the BIM design for a major urban transit project.</p>
                         <ul class="list-disc list-outside ml-5 mt-4 space-y-2">
@@ -602,7 +602,7 @@
                     id: 'uk-projects',
                     title: 'Old War Office & One Crown Plaza (UK)',
                     category: 'Commercial / BIM Design',
-                    imgSrc: 'https://placehold.co/600x400/134e4a/f0f9f9?text=UK+Projects',
+                    imgSrc: 'uk-projects.jpg', // UPDATED (and fixed typo)
                     description: `
                         <p>Worked as a BIM Designer on two high-profile commercial projects in the UK.</p>
                         <ul class="list-disc list-outside ml-5 mt-4 space-y-2">
@@ -675,7 +675,7 @@
                     projectEl.innerHTML = `
                         <div class="project-image-container overflow-hidden h-56">
                             <img src="${project.imgSrc}"
-                                onerror="this.onerror=null; this.src='https://placehold.co/600x400/e2e8f0/94a3b8?text=Image+Error';"
+                                onerror="this.onerror=null; this.src='https://placehold.co/600x400/f0f9f9/b91c1c?text='+ encodeURIComponent(this.alt) + '+Not+Found';"
                                 alt="${project.title}" class="w-full h-full object-cover">
                         </div>
                         <div class="p-5">
@@ -717,7 +717,12 @@
 
             function openModal(project) {
                 if (!modalImage || !modalTitle || !modalCategory || !modalDescription || !modal) return;
+                // Use the same error handling for the modal image
                 modalImage.src = project.imgSrc;
+                modalImage.onerror = function() {
+                    this.onerror=null; 
+                    this.src='https://placehold.co/1200x800/f0f9f9/b91c1c?text='+ encodeURIComponent(this.alt) + '+Not+Found';
+                };
                 modalImage.alt = project.title;
                 modalTitle.textContent = project.title;
                 modalCategory.textContent = project.category;
