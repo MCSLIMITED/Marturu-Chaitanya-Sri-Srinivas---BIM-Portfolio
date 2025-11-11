@@ -1,0 +1,781 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Marturu Chaitanya Srinivas - BIM Portfolio</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8fafc;
+            /* Light gray background */
+        }
+
+        /* Custom shadow for a softer look */
+        .content-card {
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .content-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+        }
+
+        /* Navigation link styling */
+        .nav-link {
+            position: relative;
+            transition: color 0.3s ease;
+            color: #d1fae5;
+            /* Lighter teal for nav links */
+        }
+
+        .nav-link:hover {
+            color: #ffffff;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -4px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: #a7f3d0;
+            /* Minty green for underline */
+            transition: width 0.3s ease;
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        /* Header text shadow for readability */
+        .text-shadow-lg {
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.25);
+        }
+
+        /* Modal styles */
+        .modal-backdrop {
+            background-color: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(5px);
+        }
+
+        .modal-content {
+            max-height: 90vh;
+        }
+
+        /* Project image hover effect */
+        .project-image-container img {
+            transition: transform 0.4s ease;
+        }
+
+        .project-image-container:hover img {
+            transform: scale(1.05);
+        }
+
+        /* Ensure profile image is a circle and covers */
+        .profile-image {
+            object-fit: cover;
+            object-position: center;
+        }
+    </style>
+</head>
+
+<body class="text-slate-800">
+
+    <!-- Header & Navigation -->
+    <header class="bg-teal-700 text-white sticky top-0 z-50 shadow-md">
+        <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex-shrink-0">
+                    <span class="text-2xl font-bold">M.C.S.Srinivas</span>
+                </div>
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-baseline space-x-4">
+                        <a href="#home" class="nav-link px-3 py-2 rounded-md text-sm font-medium">Home</a>
+                        <a href="#about" class="nav-link px-3 py-2 rounded-md text-sm font-medium">About</a>
+                        <a href="#expertise" class="nav-link px-3 py-2 rounded-md text-sm font-medium">Expertise</a>
+                        <a href="#projects" class="nav-link px-3 py-2 rounded-md text-sm font-medium">Projects</a>
+                        <a href="#experience" class="nav-link px-3 py-2 rounded-md text-sm font-medium">Experience</a>
+                        <a href="#contact" class="nav-link px-3 py-2 rounded-md text-sm font-medium">Contact</a>
+                    </div>
+                </div>
+                <div class="md:hidden">
+                    <!-- Mobile menu button -->
+                    <button type="button" id="mobile-menu-button"
+                        class="inline-flex items-center justify-center p-2 rounded-md text-teal-200 hover:text-white hover:bg-teal-600 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white"
+                        aria-controls="mobile-menu" aria-expanded="false">
+                        <span class="sr-only">Open main menu</span>
+                        <!-- Icon when menu is closed -->
+                        <svg class="block h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                            stroke="currentColor" aria-hidden="true">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M4 6h16M4 12h16m-7 6h7" />
+                        </svg>
+                        <!-- Icon when menu is open -->
+                        <svg class="hidden h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                            stroke="currentColor" aria-hidden="true">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M6 18L18 6M6 6l12 12" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Mobile menu, show/hide based on menu state. -->
+        <div class="md:hidden hidden" id="mobile-menu">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+                <a href="#home" class="nav-link block px-3 py-2 rounded-md text-base font-medium">Home</a>
+                <a href="#about" class="nav-link block px-3 py-2 rounded-md text-base font-medium">About</a>
+                <a href="#expertise" class="nav-link block px-3 py-2 rounded-md text-base font-medium">Expertise</a>
+                <a href="#projects" class="nav-link block px-3 py-2 rounded-md text-base font-medium">Projects</a>
+                <a href="#experience" class="nav-link block px-3 py-2 rounded-md text-base font-medium">Experience</a>
+                <a href="#contact" class="nav-link block px-3 py-2 rounded-md text-base font-medium">Contact</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="home" class="relative bg-teal-800 text-white py-24 md:py-32 overflow-hidden">
+        <div class="absolute inset-0 opacity-10">
+            <!-- Subtle background pattern -->
+            <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                    <pattern id="pattern-graph" x="0" y="0" width="40" height="40" patternUnits="userSpaceOnUse"
+                        patternTransform="rotate(45)">
+                        <rect width="1" height="40" fill="currentColor" />
+                        <rect width="40" height="1" fill="currentColor" />
+                    </pattern>
+                </defs>
+                <rect width="100%" height="100%" fill="url(#pattern-graph)" />
+            </svg>
+        </div>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 flex flex-col md:flex-row items-center">
+            <!-- Text Content -->
+            <div class="md:w-3/5 text-center md:text-left mb-8 md:mb-0">
+                <h1 class="text-4xl md:text-6xl font-extrabold mb-3 text-shadow-lg">Marturu Chaitanya Sri Srinivas</h1>
+                <h2 class="text-2xl md:text-3xl font-light text-teal-100 mb-6">Junior Information Manager</h2>
+                <p class="text-lg md:text-xl text-teal-50 max-w-2xl mx-auto md:mx-0">
+                    Driving digital transformation in infrastructure and building projects with 12 years of expertise in
+                    end-to-end BIM lifecycle management and ISO 19650 implementation.
+                </p>
+                <div class="mt-8 flex gap-4 justify-center md:justify-start">
+                    <a href="#projects"
+                        class="px-6 py-3 bg-white text-teal-700 font-semibold rounded-lg shadow-md hover:bg-teal-50 transition-all">
+                        View Projects
+                    </a>
+                    <a href="#contact"
+                        class="px-6 py-3 bg-transparent border-2 border-teal-200 text-teal-50 font-semibold rounded-lg hover:bg-teal-700 transition-all">
+                        Get in Touch
+                    </a>
+                </div>
+            </div>
+            <!-- Profile Image -->
+            <div class="md:w-2/5 flex justify-center">
+                <img src="IMG_0052.JPG"
+                    onerror="this.onerror=null; this.src='https://placehold.co/300x300/f0f9f9/b91c1c?text=IMG_0052.JPG+Not+Found'; this.alt='Error: Place IMG_0052.JPG in the same folder as this file.';"
+                    class="w-64 h-64 md:w-80 md:h-80 rounded-full border-8 border-teal-700 shadow-2xl profile-image"
+                    alt="Marturu Chaitanya Srinivas">
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <main class="max-w-7xl mx-auto p-4 sm:p-6 lg:p-8">
+
+        <!-- About Section -->
+        <section id="about" class="my-16 scroll-mt-20">
+            <div class="content-card bg-white rounded-xl overflow-hidden p-8 md:p-12">
+                <h2 class="text-3xl md:text-4xl font-bold text-teal-700 mb-6 text-center">About Me</h2>
+                <div class="flex flex-col md:flex-row gap-8 items-center">
+                    <div class="w-full md:w-1/3 flex justify-center">
+                        <div class="p-4 bg-teal-50 rounded-full">
+                            <svg class="w-24 h-24 text-teal-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M5.121 17.804A13.937 13.937 0 0112 16c2.5 0 4.847.655 6.879 1.804M15 10a3 3 0 11-6 0 3 3 0 016 0zm6 2a9 9 0 11-18 0 9 9 0 0118 0z">
+                                </path>
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="w-full md:w-2/3">
+                        <p class="text-lg text-slate-700 mb-4">
+                            I am an experienced BIM professional with 12 years of expertise delivering high-profile
+                            infrastructure and building projects across the Middle East, Europe, and Asia.
+                        </p>
+                        <p class="text-lg text-slate-700 mb-4">
+                            My specialization covers the end-to-end BIM lifecycle, including <strong
+                                class="font-semibold text-teal-700">ISO 19650 implementation</strong>, BIM Execution
+                            Planning (BEP), and complex inter-disciplinary coordination.
+                        </p>
+                        <p class="text-lg text-slate-700">
+                            I have a proven track record across diverse sectors such as <strong
+                                class="font-semibold">metro systems, data centers, healthcare, and commercial</strong>
+                            buildings. I am adept at driving digital efficiency through custom workflows, clash
+                            detection, and model optimization to enhance project efficiency, reduce costs, and mitigate
+                            risks.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Technical Expertise Section -->
+        <section id="expertise" class="my-16 scroll-mt-20">
+            <h2 class="text-3xl md:text-4xl font-bold text-teal-700 mb-8 text-center">Technical Expertise</h2>
+            <div class="content-card bg-white rounded-xl overflow-hidden p-8 md:p-12">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12">
+                    <!-- Left Column: Detailed Skills -->
+                    <div class="space-y-6">
+                        <div>
+                            <h3 class="text-2xl font-semibold text-teal-700 mb-3">BIM Management</h3>
+                            <ul class="list-disc list-outside ml-5 space-y-2 text-slate-600">
+                                <li>ISO 19650 (Part 1 & 2), ISO 17412-1:2020, ISO 29481-1</li>
+                                <li>BEP, EIR, MIDP, COBie, LOD & LOIN Specifications</li>
+                                <li>Appointing and Lead appointed party pre/post tender documentation</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h3 class="text-2xl font-semibold text-teal-700 mb-3">Model Management</h3>
+                            <ul class="list-disc list-outside ml-5 space-y-2 text-slate-600">
+                                <li>Model setup and federated model creation</li>
+                                <li>Managing linked models and file structures</li>
+                                <li>Ensuring model accuracy, LOIN compliance, and data integrity</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h3 class="text-2xl font-semibold text-teal-700 mb-3">4D/5D BIM Integration</h3>
+                            <ul class="list-disc list-outside ml-5 space-y-2 text-slate-600">
+                                <li>4D Planning with Navisworks (Timeliner) & Synchro 4D Pro</li>
+                                <li>Linking models to schedules (Primavera P6)</li>
+                                <li>Visual simulation for planning and site sequencing</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h3 class="text-2xl font-semibold text-teal-700 mb-3">Data Management</h3>
+                            <ul class="list-disc list-outside ml-5 space-y-2 text-slate-600">
+                                <li>Parameter standardization and shared parameters</li>
+                                <li>COBie and IFC standards implementation</li>
+                                <li>WBS and PBS development and model integration</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h3 class="text-2xl font-semibold text-teal-700 mb-3">Common Data Environment (CDE)
+                                Management</h3>
+                            <ul class="list-disc list-outside ml-5 space-y-2 text-slate-600">
+                                <li>File naming conventions and version control</li>
+                                <li>Document approval workflows (ISO 19650 aligned)</li>
+                                <li>Autodesk Construction Cloud (ACC) management</li>
+                                <li>Creating projects as per ISO 19650 specification and naming convention</li>
+                                <li>Folder structuring as per project requirements</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Right Column: Skills Chart -->
+                    <div class="flex flex-col items-center">
+                        <h3 class="text-2xl font-semibold text-teal-700 mb-4 text-center">Software Proficiency</h3>
+                        <div class="w-full max-w-lg h-96">
+                            <canvas id="skillsChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Projects Gallery Section -->
+        <section id="projects" class="my-16 scroll-mt-20">
+            <h2 class="text-3xl md:text-4xl font-bold text-teal-700 mb-8 text-center">Project Highlights</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+                <!-- Project items will be injected here by JavaScript -->
+            </div>
+        </section>
+
+        <!-- Professional Experience Section -->
+        <section id="experience" class="my-16 scroll-mt-20">
+            <h2 class="text-3xl md:text-4xl font-bold text-teal-700 mb-8 text-center">Professional Experience</h2>
+            <div class="content-card bg-white rounded-xl overflow-hidden p-8 md:p-12">
+                <div class="relative border-l-4 border-teal-200 space-y-12">
+                    <!-- Timeline items will be injected here by JavaScript -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="my-16 scroll-mt-20">
+            <div class="content-card bg-teal-700 text-white rounded-xl overflow-hidden p-8 md:p-12">
+                <div class="text-center">
+                    <h2 class="text-3xl md:text-4xl font-bold mb-4">Get in Touch</h2>
+                    <p class="text-lg text-teal-100 mb-8 max-w-2xl mx-auto">
+                        I'm always open to discussing new projects, creative ideas, or opportunities to be part of your
+                        vision.
+                    </p>
+                    <div class="flex flex-col md:flex-row justify-center items-center gap-6 md:gap-10">
+                        <a href="mailto:chaitanyasrinivas.m@gmail.com"
+                            class="flex items-center gap-3 text-lg font-medium text-white hover:text-teal-200 transition">
+                            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z"></path>
+                                <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z"></path>
+                            </svg>
+                            chaitanyasrinivas.m@gmail.com
+                        </a>
+                        <a href="https://www.linkedin.com/in/marturu-chaitanya-sri-srinivas-15b00a141" target="_blank"
+                            rel="noopener noreferrer"
+                            class="flex items-center gap-3 text-lg font-medium text-white hover:text-teal-200 transition">
+                            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                                <path fill-rule="evenodd"
+                                    d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"
+                                    clip-rule="evenodd" />
+                            </svg>
+                            LinkedIn Profile
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-slate-800 text-slate-400 p-8 text-center">
+        <p>&copy; <span id="currentYear"></span> Marturu Chaitanya Sri Srinivas. All rights reserved.</p>
+    </footer>
+
+    <!-- Project Modal -->
+    <div id="projectModal"
+        class="fixed inset-0 w-full h-full flex items-center justify-center z-[100] hidden modal-backdrop p-4">
+        <div
+            class="content-card bg-white rounded-xl max-w-4xl w-full m-auto overflow-hidden modal-content relative scale-95 transition-all duration-300">
+            <!-- Close Button -->
+            <button id="closeModalButton"
+                class="absolute top-4 right-4 text-slate-500 hover:text-slate-800 z-10">
+                <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12">
+                    </path>
+                </svg>
+            </button>
+
+            <div class="overflow-y-auto max-h-[90vh] p-8 md:p-10">
+                <img id="modalImage" src="https://placehold.co/1200x800/e2e8f0/94a3b8?text=Project+Image"
+                    onerror="this.onerror=null; this.src='https://placehold.co/1200x800/e2e8f0/94a3b8?text=Project+Image';"
+                    alt="Project Image" class="w-full h-auto object-cover rounded-lg mb-6 max-h-96">
+                <h2 id="modalTitle" class="text-3xl font-bold text-teal-700 mb-4">Project Title</h2>
+                <span id="modalCategory"
+                    class="inline-block bg-teal-100 text-teal-800 text-sm font-medium px-3 py-1 rounded-full mb-4">Category</span>
+                <div id="modalDescription" class="text-lg text-slate-700 space-y-4">
+                    <p>Project description goes here.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+
+            // --- Mobile Menu Toggle ---
+            const menuButton = document.getElementById('mobile-menu-button');
+            const mobileMenu = document.getElementById('mobile-menu');
+            const mobileLinks = mobileMenu.querySelectorAll('a');
+
+            if (menuButton && mobileMenu) {
+                menuButton.addEventListener('click', () => {
+                    mobileMenu.classList.toggle('hidden');
+                    menuButton.querySelector('svg.block').classList.toggle('hidden');
+                    menuButton.querySelector('svg.hidden').classList.toggle('hidden');
+                });
+            }
+
+            // Close mobile menu when a link is clicked
+            if (mobileLinks && mobileMenu && menuButton) {
+                mobileLinks.forEach(link => {
+                    link.addEventListener('click', () => {
+                        mobileMenu.classList.add('hidden');
+                        menuButton.querySelector('svg.block').classList.remove('hidden');
+                        menuButton.querySelector('svg.hidden').classList.add('hidden');
+                    });
+                });
+            }
+
+            // --- Footer Year ---
+            const currentYearEl = document.getElementById('currentYear');
+            if (currentYearEl) {
+                currentYearEl.textContent = new Date().getFullYear();
+            }
+
+            // --- Skills Chart ---
+            const skillsCtx = document.getElementById('skillsChart');
+            if (skillsCtx) {
+                new Chart(skillsCtx, {
+                    type: 'bar',
+                    data: {
+                        labels: [
+                            'Revit (Arch, Struc, MEP)',
+                            'Navisworks (Clash, 4D)',
+                            'BIM 360 / ACC',
+                            'AutoCAD',
+                            'Civil 3D',
+                            'Aconex',
+                            'Revizto',
+                            'Python 3',
+                            'Generative AI (ChatGPT, etc.)',
+                            'Vibe CDE'
+                        ],
+                        datasets: [{
+                            label: 'Proficiency',
+                            data: [95, 95, 90, 85, 80, 85, 80, 75, 80, 85],
+                            backgroundColor: [
+                                'rgba(13, 148, 136, 0.7)',
+                                'rgba(15, 118, 110, 0.7)',
+                                'rgba(13, 148, 136, 0.7)',
+                                'rgba(15, 118, 110, 0.7)',
+                                'rgba(13, 148, 136, 0.7)',
+                                'rgba(15, 118, 110, 0.7)',
+                                'rgba(13, 148, 136, 0.7)',
+                                'rgba(15, 118, 110, 0.7)',
+                                'rgba(13, 148, 136, 0.7)',
+                                'rgba(15, 118, 110, 0.7)'
+                            ],
+                            borderColor: [
+                                'rgba(13, 148, 136, 1)',
+                                'rgba(15, 118, 110, 1)',
+                                'rgba(13, 148, 136, 1)',
+                                'rgba(15, 118, 110, 1)',
+                                'rgba(13, 148, 136, 1)',
+                                'rgba(15, 118, 110, 1)',
+                                'rgba(13, 148, 136, 1)',
+                                'rgba(15, 118, 110, 1)',
+                                'rgba(13, 148, 136, 1)',
+                                'rgba(15, 118, 110, 1)'
+                            ],
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        indexAxis: 'y',
+                        scales: {
+                            x: {
+                                beginAtZero: true,
+                                max: 100,
+                                grid: {
+                                    color: '#e2e8f0'
+                                },
+                                ticks: {
+                                    color: '#475569'
+                                }
+                            },
+                            y: {
+                                grid: {
+                                    display: false
+                                },
+                                ticks: {
+                                    color: '#475569'
+                                }
+                            }
+                        },
+                        plugins: {
+                            legend: {
+                                display: false
+                            },
+                            tooltip: {
+                                backgroundColor: '#0f766e',
+                                titleFont: {
+                                    size: 16,
+                                    weight: 'bold'
+                                },
+                                bodyFont: {
+                                    size: 14
+                                },
+                                callbacks: {
+                                    label: function (context) {
+                                        return ` Proficiency: ${context.raw}%`;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                });
+            }
+
+            // --- Project Data ---
+            const projects = [
+                {
+                    id: 'milan-metro',
+                    title: 'Milan Metro M1 Extension ($360M)',
+                    category: 'Metro / BIM Management',
+                    imgSrc: 'https://placehold.co/600x400/115e59/f0f9f9?text=Milan+Metro',
+                    description: `
+                        <p>Serving as Assistant BIM Manager / Integrator for Metropolitana Milanese S.p.A on major metro projects.</p>
+                        <ul class="list-disc list-outside ml-5 mt-4 space-y-2">
+                            <li>Overseeing BIM lifecycle leadership for the Milan Metro M1 Extension.</li>
+                            <li>Managing multidisciplinary models (civil, MEP, track, systems) and creating federated models for stations, tunnels, and depots.</li>
+                            <li>Leading clash detection, 4D simulation, and CDE management (BIM 360/ACC).</li>
+                            <li>Enforcing ISO 19650 standards and project-specific BEP/LOIN requirements.</li>
+                        </ul>
+                    `
+                },
+                {
+                    id: 'tel-aviv-metro',
+                    title: 'Tel Aviv Metro ($47B)',
+                    category: 'Metro / BIM Management',
+                    imgSrc: 'https://placehold.co/600x400/134e4a/f0f9f9?text=Tel+Aviv+Metro',
+                    description: `
+                        <p>Providing full BIM lifecycle leadership for the large-scale Tel Aviv Metro project as part of Metropolitana Milanese S.p.A.</p>
+                        <ul class="list-disc list-outside ml-5 mt-4 space-y-2">
+                            <li>Managing and integrating complex BIM models across all disciplines for this multi-billion dollar project.</li>
+                            <li>Coordinating with international stakeholders to ensure digital delivery alignment.</li>
+                            <li>Implementing and enforcing ISO 19650 protocols for information management.</li>
+                        </ul>
+                    `
+                },
+                {
+                    id: 'neom-oxagon',
+                    title: 'NEOM Oxagon ($33B)',
+                    category: 'Infrastructure / BIM Design',
+                    imgSrc: 'https://placehold.co/600x400/115e59/f0f9f9?text=NEOM+Oxagon',
+                    description: `
+                        <p>As BIM Lead Designer at Jacobs, oversaw the creation and coordination of detailed electrical BIM models for the NEOM Oxagon floating industrial city design.</p>
+                        <ul class="list-disc list-outside ml-5 mt-4 space-y-2">
+                            <li>Ensured all modeling followed project-specific standards (LOD, naming conventions, families).</li>
+                            <li>Collaborated with architectural, structural, and MEP teams for clash-free, integrated design.</li>
+                            <li>Defined modeling procedures, contributed to the BEP, and provided technical leadership and quality reviews.</li>
+                            <li>Validated model content and parameters to meet client requirements (LOD, COBie, IFC).</li>
+                        </ul>
+                    `
+                },
+                {
+                    id: 'mumbai-metro',
+                    title: 'Mumbai Metro Line 6 & CMRL',
+                    category: 'Metro / Detailed Design',
+                    imgSrc: 'https://placehold.co/600x400/134e4a/f0f9f9?text=Mumbai+Metro',
+                    description: `
+                        <p>Played a key role in the detailed design and construction close-out phases for underground and elevated metro packages.</p>
+                        <ul class="list-disc list-outside ml-5 mt-4 space-y-2">
+                            <li>Led design coordination meetings with consultants and stakeholders to resolve complex design challenges.</li>
+                            <li>Managed the development of high-LOD models for Architecture, Structure, and MEP systems for CMRL Package 4 (underground).</li>
+                            <li>Oversaw construction close-out for CMRL Package 5 (elevated).</li>
+                            <li>Coordinated multi-disciplinary models to produce clash-free, constructible designs for Mumbai Metro Line 6.</li>
+                        </ul>
+                    `
+                },
+                {
+                    id: 'sea-world',
+                    title: 'Sea World Abu Dhabi',
+                    category: 'Entertainment / BIM Design',
+                    imgSrc: 'https://placehold.co/600x400/0f766e/f0f9f9?text=Sea+World+AD',
+                    description: `
+                        <p>Led the electrical system modeling for this large-scale entertainment venue.</p>
+                        <ul class="list-disc list-outside ml-5 mt-4 space-y-2">
+                            <li>Developed detailed 3D models for all electrical systems.</li>
+                            <li>Performed lighting (lux) calculations and simulations within the BIM environment.</li>
+                            <li>Conducted complex cable tray calculations and routing to optimize system layout and prevent clashes.</li>
+                        </ul>
+                    `
+                },
+                {
+                    id: 'honolulu-rail',
+                    title: 'Honolulu Rail Transit (Hawaii)',
+                    category: 'Rail / BIM Design',
+                    imgSrc: 'https://placehold.co/600x400/0d9488/f0f9f9?text=Honolulu+Rail',
+                    description: `
+                        <p>Contributed to the BIM design for a major urban transit project.</p>
+                        <ul class="list-disc list-outside ml-5 mt-4 space-y-2">
+                            <li>Developed and managed BIM models for rail infrastructure components.</li>
+                            <li>Coordinated with various engineering disciplines to ensure model accuracy and integration.</li>
+                            <li>Assisted in clash detection and resolution to support the design process.</li>
+                        </ul>
+                    `
+                },
+                {
+                    id: 'uk-projects',
+                    title: 'Old War Office & One Crown Plaza (UK)',
+                    category: 'Commercial / BIM Design',
+                    imgSrc: 'https://placehold.co/600x400/134e4a/f0f9f9?text=UK+Projects',
+                    description: `
+                        <p>Worked as a BIM Designer on two high-profile commercial projects in the UK.</p>
+                        <ul class="list-disc list-outside ml-5 mt-4 space-y-2">
+                            <li>Developed detailed BIM models for building systems.</li>
+                        </ul>
+                    `
+                }
+            ];
+
+            // --- Experience Data ---
+            const experience = [
+                {
+                    company: "Metropolitana Milanese S.p.A",
+                    role: "Assistant BIM Manager / Integrator",
+                    period: "Apr 2024 - Present",
+                    location: "Dubai, UAE",
+                    description: "Managing and integrating multidisciplinary BIM models for projects like Milan Metro M1 Extension ($360M), Tel Aviv Metro ($47B), and CMRL. Leading clash detection, 4D simulation, CDE management (ACC/BIM 360), and enforcing ISO 19650 standards."
+                },
+                {
+                    company: "Jacobs",
+                    role: "BIM Lead Designer",
+                    period: "Oct 2022 - Mar 2024",
+                    location: "Dubai, UAE",
+                    description: "Oversaw creation and coordination of detailed electrical BIM models for NEOM Oxagon. Ensured models followed project standards (LOD, naming conventions), collaborated with all disciplines for clash-free design, and defined modeling procedures. Provided technical leadership, quality reviews, and validated model content against client requirements (LOD, COBie, IFC)."
+                },
+                {
+                    company: "Metropolitana Milanese S.p.A",
+                    role: "Design / BIM Coordinator",
+                    period: "Jun 2020 - Oct 2022",
+                    location: "Dubai, UAE",
+                    description: "Responsible for electrical designs (layouts, DBs, lighting) and full-cycle BIM coordination. Generated electrical models, ran QA/QC, and coordinated with MEP/Arch/Struc. Implemented BIM best practices, defined execution plans, and led coordination meetings for projects like Mumbai Metro Line 6 & CMRL."
+                },
+                {
+                    company: "Omnix International",
+                    role: "BIM Lead Designer",
+                    period: "Feb 2019 - Jun 2020",
+                    location: "Dubai, UAE",
+                    description: "Led electrical system modeling for Sea World Abu Dhabi, including lux and cable tray calculations and high-detail 3D modeling."
+                },
+                {
+                    company: "M+W Engineering",
+                    role: "BIM Lead Designer",
+                    period: "Sep 2018 - Feb 2019",
+                    location: "Hyderabad, India",
+                    description: "Delivered high-detail BIM models for specialized cleanroom systems for Wyeth Nutrition, Singapore."
+                },
+                {
+                    company: "AECOM",
+                    role: "BIM Designer",
+                    period: "Aug 2017 - Aug 2018",
+                    location: "Gurugram, India",
+                    description: "Contributed to BIM design for high-profile UK projects, including the Old War Office & One Crown Plaza."
+                },
+                {
+                    company: "Early Career",
+                    role: "Electrical Engineer / BIM Designer",
+                    period: "Jul 2013 - Aug 2017",
+                    location: "Various (Doha, Bengaluru)",
+                    description: "Gained foundational experience at Delta Engineering (Doha Metro), Mott MacDonald (Tengiz Expansion), and Magnasoft (Honolulu Rail Transit)."
+                }
+            ];
+
+            // --- Populate Projects ---
+            const projectsContainer = document.querySelector('#projects .grid');
+            if (projectsContainer) {
+                projects.forEach(project => {
+                    const projectEl = document.createElement('div');
+                    projectEl.className = 'content-card bg-white rounded-xl overflow-hidden cursor-pointer';
+                    projectEl.setAttribute('data-project-id', project.id);
+                    projectEl.innerHTML = `
+                        <div class="project-image-container overflow-hidden h-56">
+                            <img src="${project.imgSrc}"
+                                onerror="this.onerror=null; this.src='https://placehold.co/600x400/e2e8f0/94a3b8?text=Image+Error';"
+                                alt="${project.title}" class="w-full h-full object-cover">
+                        </div>
+                        <div class="p-5">
+                            <span class="inline-block bg-teal-100 text-teal-800 text-xs font-medium px-2.5 py-0.5 rounded-full mb-2">${project.category}</span>
+                            <h3 class="text-xl font-semibold text-slate-900">${project.title}</h3>
+                        </div>
+                    `;
+                    projectsContainer.appendChild(projectEl);
+                });
+            }
+
+            // --- Populate Experience Timeline ---
+            const experienceContainer = document.querySelector('#experience .relative');
+            if (experienceContainer) {
+                experience.forEach(exp => {
+                    const expEl = document.createElement('div');
+                    expEl.className = 'relative pl-10'; // Padding left for timeline
+                    expEl.innerHTML = `
+                        <!-- Timeline Dot -->
+                        <div class="absolute left-0 top-1 w-4 h-4 bg-teal-500 rounded-full border-4 border-white" style="transform: translateX(-10px);"></div>
+                        <span class="block text-sm font-medium text-teal-600">${exp.period}</span>
+                        <h3 class="text-2xl font-semibold text-slate-900 mt-1">${exp.role}</h3>
+                        <p class="text-lg font-medium text-slate-600 mb-2">${exp.company} - ${exp.location}</p>
+                        <p class="text-slate-700">${exp.description}</p>
+                    `;
+                    experienceContainer.appendChild(expEl);
+                });
+            }
+
+
+            // --- Modal Logic ---
+            const modal = document.getElementById('projectModal');
+            const modalContent = modal.querySelector('.modal-content');
+            const closeModalButton = document.getElementById('closeModalButton');
+            const modalImage = document.getElementById('modalImage');
+            const modalTitle = document.getElementById('modalTitle');
+            const modalCategory = document.getElementById('modalCategory');
+            const modalDescription = document.getElementById('modalDescription');
+
+            function openModal(project) {
+                if (!modalImage || !modalTitle || !modalCategory || !modalDescription || !modal) return;
+                modalImage.src = project.imgSrc;
+                modalImage.alt = project.title;
+                modalTitle.textContent = project.title;
+                modalCategory.textContent = project.category;
+                modalDescription.innerHTML = project.description;
+
+                modal.classList.remove('hidden');
+                setTimeout(() => {
+                    if (modalContent) {
+                        modalContent.classList.remove('scale-95');
+                    }
+                }, 10); // Start transition after display
+            }
+
+            function closeModal() {
+                if (modalContent) {
+                    modalContent.classList.add('scale-95');
+                }
+                setTimeout(() => {
+                    if (modal) {
+                        modal.classList.add('hidden');
+                    }
+                }, 300); // Wait for transition to finish
+            }
+
+            if (projectsContainer) {
+                projectsContainer.addEventListener('click', (e) => {
+                    const projectCard = e.target.closest('[data-project-id]');
+                    if (projectCard) {
+                        const projectId = projectCard.getAttribute('data-project-id');
+                        const projectData = projects.find(p => p.id === projectId);
+                        if (projectData) {
+                            openModal(projectData);
+                        }
+                    }
+                });
+            }
+
+            if (closeModalButton) {
+                closeModalButton.addEventListener('click', closeModal);
+            }
+
+            // Close modal on backdrop click
+            if (modal) {
+                modal.addEventListener('click', (e) => {
+                    if (e.target === modal) {
+                        closeModal();
+                    }
+                });
+            }
+
+            // Close modal with Escape key
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape' && modal && !modal.classList.contains('hidden')) {
+                    closeModal();
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>
